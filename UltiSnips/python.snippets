@@ -246,13 +246,15 @@ def write_init_body(args, parents, snip):
 	parents = [p for p in parents if p != 'object']
 
 	for p in parents:
-		snip += p + ".__init__(self)"
+		# snip += p + ".__init__(self)"
+		snip += "super().__init__()"
 
 	if parents:
 		snip.rv += '\n' + snip.mkline('', indent='')
 
 	for arg in filter(lambda arg: not arg.is_vararg(), args):
-		snip += "self._%s = %s" % (arg, arg)
+		# snip += "self._%s = %s" % (arg, arg)
+		snip += "self.%s = %s" % (arg, arg)
 
 
 def write_slots_args(args, snip):
